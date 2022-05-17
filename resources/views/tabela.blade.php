@@ -26,14 +26,58 @@
     <body>
       @include('flash-message')
       <div class="row">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Ola {{$Cadastro->name}} !!</h5>
-            <p class="card-text">Sabemos que seu e-mail é: {{$Cadastro->name}} e sua idade é: {{$Cadastro->anos}} anos. <br>
-              Obrigado por se cadastrar. 
-            </p>
-          </div>
-        </div>
+        <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">A</th>
+                <th scope="col">B</th>
+                <th scope="col">C</th>
+                <th scope="col">D</th>
+                <th scope="col">E</th>
+                <th scope="col">Soma Linha</th>
+              </tr>
+            </thead>
+            <tbody>
+              
+                @php
+                 $soma = 0;
+                 $count = 76;
+                 $linha = 0;
+                @endphp
+                <tr>
+                @for ($i = 1; $i < $count; $i++)
+
+                    @if($linha < 5)
+                        @if($i % 2 == 0)
+                            <td style='color:red'>{{$i}}</th>
+                        @else
+                            <td>{{$i}}</th>
+                        @endif
+                    @else
+                    <td>{{$soma}}</th>
+                    @php
+                     $soma = 0;
+                     $linha = 0;
+                    @endphp
+                    </tr>
+                    <tr>
+                        @if($i % 2 == 0)
+                            <th style='color:red'>{{$i}}</th>
+                        @else
+                            <th>{{$i}}</th>
+                        @endif
+                    @endif 
+                    @php
+                     $soma += $i;
+                     $linha ++;
+                    @endphp
+                @endfor
+                <td>{{$soma}}</th>
+                </tr>
+                
+              
+            </tbody>
+          </table>
       </div>
     
     </body>

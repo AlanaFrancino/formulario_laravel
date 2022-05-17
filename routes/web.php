@@ -26,6 +26,9 @@ Route::prefix('/')->name('cadastro.')->group(function(){
 
     });
 });
+Route::get('/tabela', function () {
+    return view('tabela');
+});
 
 
 

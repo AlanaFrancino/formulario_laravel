@@ -42,8 +42,9 @@ class CadastroController extends Controller
             'name',
             'email',
         ]);
-        $data['dt_nascimento'] = Carbon::parse($request->get('dt_nascimento'))->format('Y/m/d');
-
+        $datanasc = $request->get('dt_nascimento');
+        $data['dt_nascimento'] = Carbon::parse($datanasc)->format('Y-m-d');
+        
         try {
 
             $Cadastro = Cadastro::create($data);
@@ -54,8 +55,12 @@ class CadastroController extends Controller
     }
 
 
-    public function retorno()
+    public function retorno($id)
     {
-        return view('retorno');
+        $Cadastro = Cadastro::find($id);
+        $date = Carbon::createFromFormat('Y-m-d', $Cadastro->dt_nascimento);
+        $anos = $date->diffInYears(Carbon::now());
+        $Cadastro['anos'] = $anos;
+        return view('retorno',compact('Cadastro'));
     }
 }
