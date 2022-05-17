@@ -3,30 +3,59 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cadastro;
+use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 
 class CadastroController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
         return view('formulario');
     }
 
-    public function store($request)
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
     {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        // dd($request);
         $data = $request->only([
-            'descricao',
+            'name',
+            'email',
         ]);
-        $data['ativo'] = true;
-        
+        $data['dt_nascimento'] = Carbon::parse($request->get('dt_nascimento'))->format('Y/m/d');
+
         try {
 
-            Cadastro::create($data);
-            
-            return redirect()->route('generos.index')->with('success','Genero Criado Com Sucesso');
+            $Cadastro = Cadastro::create($data);
+            return redirect()->route('cadastro.retorno', ['id' => $Cadastro->id]);
         } catch (Exception $e) {
-            return view('generos.generos', compact('generos', 'parameter'));
+            return  redirect()->route('cadastro.index')->with('error','Não foi possível cadastrar tente novamente');
         }
+    }
+
+
+    public function retorno()
+    {
+        return view('retorno');
     }
 }

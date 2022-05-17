@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Cadastro extends Model
 {
     use HasFactory;
+
+    protected $table = 'cadastro';
+
+    protected $fillable = [
+        'name',
+        'email',
+        'dt_nascimento',
+    ];
 }

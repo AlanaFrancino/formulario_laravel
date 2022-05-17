@@ -14,17 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::controller(CadastroController::class)->group(function(){
-    Route::get('/','index')->name('index'); //busca a resposta da lista dos endereços dos usuarios
-
-});
-
-Route::group(['middleware' => ['check.idade']], function() {
-    
+Route::prefix('/')->name('cadastro.')->group(function(){
     Route::controller(CadastroController::class)->group(function(){
-        Route::post('/cadastro', 'store')->name('save'); //função de insert no banco os endereços
+        Route::get('/','index')->name('index');
+        Route::get('/retorno/{id}', 'retorno')->name('retorno');
+        Route::group([
+            'middleware' => 'check.idade',
+        ], function ($router) {
+            Route::post('/cadastro', 'store')->name('store');
+        });
+
     });
-         
 });
+
 
 

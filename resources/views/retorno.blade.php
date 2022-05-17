@@ -23,59 +23,12 @@
             }
         </style>
     </head>
-
     <body>
-        @include('flash-message')
-        <div class="row">
-            
-            <div class="col-md-6">
-            <form action="{{route('cadastro.store')}}" method="POST">
-                @csrf 
-              <div class="card card-danger">
-                <div class="card-header">
-                  <h3 class="card-title">Cadastro</h3>
-                </div>
-
-                    <div class="form-group">
-                        <label>Nome</label>
+      @include('flash-message')
+      <div class="row">
+        
+      </div>
     
-                        <div class="input-group">
-                        <input id="name" name="name" class="form-control form-control" type="text" placeholder="Nome" aria-label="nome" required >
-                        </div>
-                  </div>
-                  <!-- Date mm/dd/yyyy -->
-                  <div class="form-group">
-                    <label>Data Nascimento</label>
-                    <div class="input-group">
-                      <input type="text" id="dt_nascimento" name="dt_nascimento" class="form-control" data-inputmask-alias="datetime" data-inputmask-inputformat="dd/mm/yyyy" data-mask required>
-                    <!-- /.input group -->
-                  </div>
-
-                  <div class="form-group">
-                    <label>Email</label>
-  
-                    <div class="input-group">
-                      <input type="text"  class="form-control-plaintext" placeholder="email@example.com" id="email" name="email" value="" required>
-                    </div>
-                    <!-- /.input group -->
-                  </div>
-
-                </div>
-                <!-- /.card-body -->
-              </div>
-              <!-- /.card -->
-                <div class="card-footer text-right">
-                    <button type="submit" class="btn brn-lager btn-success">Cadastrar</button>
-                </div>
-            </form>
-            </div>
-        </div>
-    <script src="https://unpkg.com/inputmask@4.0.4/dist/inputmask/dependencyLibs/inputmask.dependencyLib.js"></script>
-    <script src="https://unpkg.com/inputmask@4.0.4/dist/inputmask/inputmask.js"></script>
-    <script src="https://unpkg.com/inputmask@4.0.4/dist/inputmask/inputmask.date.extensions.js"></script>
-    <script>
-        Inputmask().mask("input");
-    </script>
     </body>
 
 </html>

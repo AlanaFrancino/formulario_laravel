@@ -17,12 +17,11 @@ class CheckIdade
      */
     public function handle(Request $request, Closure $next)
     {
-        $date = Carbon::createFromFormat('d/m/Y', $request->input('dt_nascimento'));
+        $date = Carbon::createFromFormat('d/m/Y', $request->get('dt_nascimento'));
         $anos = $date->diffInYears(Carbon::now());
 
-        dd($anos);
-
-        if($anos >= 21)
+        if($anos < 21)
+        return redirect()->route('cadastro.index')->with('error','Voce não possui idade para realizar o cadastro');
         
         return $next($request);
     }
